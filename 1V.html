@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUshift — Learn Smarter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Optional: nicer default typography -->
+  <style>
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+    .icon-circle { width: 42px; height: 42px; border-radius: 9999px; display:flex; align-items:center; justify-content:center; background: rgba(20,184,166,.08); }
+  </style>
+</head>
+
+<body class="bg-[#e6e3da] font-sans text-gray-700">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="w-full py-6 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur px-6 py-3 rounded-full shadow-sm">
+      <a href="#home" class="flex items-center gap-3">
+        <img src="logo-removebg-preview.png" class="w-28 md:w-32" alt="EDUshift logo">
+      </a>
+
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="#home" class="hover:text-teal-700 transition">Home</a>
+        <a href="#about" class="hover:text-teal-700 transition">About</a>
+        <a href="#services" class="hover:text-teal-700 transition">What we do</a>
+        <a href="#team" class="hover:text-teal-700 transition">Team</a>
+        <a href="#contact" class="hover:text-teal-700 transition">Contact</a>
+      </nav>
+
+      <div class="flex gap-3 md:gap-4 items-center">
+        <button class="text-sm hover:text-teal-700 transition">Sign in</button>
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm transition shadow-sm">
+          Sign up
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-10 md:py-16 px-6">
+    <div>
+      <p class="text-sm text-gray-500 mb-2">AI-powered learning • simulations • practical skills</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-teal-800 leading-tight mb-4">
+        EDUshift
+      </h1>
+      <p class="mb-6 text-base leading-relaxed text-gray-600">
+        Your gateway to practical learning. Explore high-quality courses, guided pathways, and immersive experiences
+        designed to help you build real-world skills—fast.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full text-sm transition shadow-sm">
+          Get Started
+        </button>
+        <a href="#services" class="px-6 py-3 rounded-full text-sm border border-teal-700/20 hover:bg-white/60 transition">
+          Explore Features
+        </a>
+      </div>
+
+      <div class="mt-8 flex items-center gap-6 text-sm text-gray-500">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-teal-600"></span>
+          Skills-first learning
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-orange-500"></span>
+          Expert guidance
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="absolute -inset-4 bg-white/40 blur-2xl rounded-3xl"></div>
+      <img
+        src="9432de_3f37af6d7fc94dd88218a63176405913~mv2.avif"
+        class="relative w-full h-[280px] md:h-[360px] object-cover rounded-2xl shadow-lg"
+        alt="Learning illustration"
+      >
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-14 md:py-20 px-6">
+    <div>
+      <p class="text-sm text-gray-500 mb-2">About EDUshift</p>
+      <h2 class="text-3xl font-bold text-teal-800 mb-4">Learning should be accessible — and practical.</h2>
+      <p class="text-base leading-relaxed text-gray-600">
+        We build learning experiences that feel real. From technology and business to creativity and growth skills,
+        EDUshift helps learners progress through structured content, hands-on activities, and measurable outcomes.
+      </p>
+
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="bg-white/70 rounded-xl p-4 shadow-sm">
+          <p class="font-semibold text-gray-800 mb-1">Skill-based tracks</p>
+          <p class="text-gray-500">Clear pathways with practical milestones.</p>
+        </div>
+        <div class="bg-white/70 rounded-xl p-4 shadow-sm">
+          <p class="font-semibold text-gray-800 mb-1">Measurable progress</p>
+          <p class="text-gray-500">Track improvements with smart feedback.</p>
+        </div>
+      </div>
+    </div>
+
+    <img
+      src="9432de_81a810a762564f85b819ba02ecaaa7cb~mv2.avif"
+      class="w-full h-[280px] md:h-[340px] object-cover rounded-2xl shadow-lg"
+      alt="About illustration"
+    >
+  </section>
+
+  <!-- ================= WHAT WE DO ================= -->
+  <section id="services" class="bg-white py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div>
+          <p class="text-sm text-gray-500 mb-1">What we do</p>
+          <h2 class="text-3xl font-bold text-gray-900">A modern learning experience</h2>
+        </div>
+        <div>
+          <p class="text-base text-gray-600 leading-relaxed">
+            We combine structured learning, hands-on practice, and progress tracking—so learners don’t just “watch content”,
+            they actually build skills.
+          </p>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="card-hover bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 6v6l4 2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Guided Learning Paths</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Step-by-step tracks designed around outcomes, not just lessons—so learners always know what’s next.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-hover bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M8 7h8M8 11h8M8 15h6" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Practical Projects</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Realistic tasks that turn theory into skill—perfect for students, graduates, and professionals.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-hover bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 3v18M3 12h18" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 7l10 10" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Progress Tracking</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Simple metrics and feedback loops that help learners see improvement and stay motivated.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT 2 / CTA ================= -->
+  <section class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-14 md:py-20 px-6">
+    <div class="w-full h-[280px] md:h-[340px] bg-white/70 rounded-2xl shadow-sm border border-white/60 flex items-center justify-center">
+      <div class="text-center px-10">
+        <p class="text-sm text-gray-500 mb-2">Coming soon</p>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Simulations & immersive learning</h3>
+        <p class="text-sm text-gray-600">A more interactive way to learn by doing—inside a virtual environment.</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500 mb-2">Why EDUshift</p>
+      <h2 class="text-3xl font-bold text-teal-800 mb-4">Turn learning into capability.</h2>
+      <p class="text-base text-gray-600 mb-6 leading-relaxed">
+        Whether you’re upskilling for work or learning something new, we help you practice decisions, build projects,
+        and track progress — without overwhelm.
+      </p>
+      <a href="#contact" class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl text-sm transition shadow-sm">
+        Talk to us
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section id="team" class="max-w-6xl mx-auto py-14 md:py-20 px-6 text-center">
+    <p class="text-sm text-gray-500 mb-2">Our people</p>
+    <h2 class="text-3xl font-bold mb-12 text-gray-900">Meet Our Team</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- Member -->
+      <div class="bg-white/70 rounded-2xl p-6 shadow-sm border border-white/60">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-teal-800">Guy Hawkins</h4>
+        <p class="text-sm text-gray-600 mb-4">Learning Experience Designer</p>
+        <div class="flex justify-center gap-4 text-teal-800 text-sm">
+          <a class="hover:underline" href="#" aria-label="LinkedIn">in</a>
+          <a class="hover:underline" href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+
+      <div class="bg-white/70 rounded-2xl p-6 shadow-sm border border-white/60">
+        <img src="https://randomuser.me/api/portraits/men/33.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-teal-800">Guy Hawkins</h4>
+        <p class="text-sm text-gray-600 mb-4">Product & Content Lead</p>
+        <div class="flex justify-center gap-4 text-teal-800 text-sm">
+          <a class="hover:underline" href="#" aria-label="LinkedIn">in</a>
+          <a class="hover:underline" href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+
+      <div class="bg-white/70 rounded-2xl p-6 shadow-sm border border-white/60">
+        <img src="https://randomuser.me/api/portraits/men/34.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-teal-800">Guy Hawkins</h4>
+        <p class="text-sm text-gray-600 mb-4">Partnerships & Growth</p>
+        <div class="flex justify-center gap-4 text-teal-800 text-sm">
+          <a class="hover:underline" href="#" aria-label="LinkedIn">in</a>
+          <a class="hover:underline" href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="max-w-6xl mx-auto py-14 md:py-20 px-6">
+    <p class="text-sm text-gray-500 text-center mb-2">Let’s connect</p>
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-900">Contact</h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Form -->
+      <form class="space-y-4 bg-white/70 rounded-2xl p-6 shadow-sm border border-white/60">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" placeholder="First name" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+          <input type="text" placeholder="Last name" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+        </div>
+        <input type="email" placeholder="Email" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+        <textarea placeholder="Message" rows="4" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40"></textarea>
+        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl w-full transition shadow-sm">
+          Send
+        </button>
+        <p class="text-xs text-gray-500">We typically reply within 1–2 business days.</p>
+      </form>
+
+      <!-- Info -->
+      <div class="bg-teal-800 text-white p-6 rounded-2xl shadow-sm">
+        <h3 class="font-semibold mb-4 text-lg">Contact Information</h3>
+        <p class="text-sm mb-2 opacity-90">Email: info@example.com</p>
+        <p class="text-sm mb-2 opacity-90">Phone: 01152503691</p>
+        <p class="text-sm mb-6 opacity-90">Address: Nasr City, Cairo</p>
+
+        <div class="w-full h-44 bg-white/15 rounded-xl flex items-center justify-center text-sm opacity-80">
+          Map placeholder
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-teal-900 text-white py-12">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 px-6 text-sm">
+      <div>
+        <img src="logo-removebg-preview.png" class="w-28 mb-6" alt="EDUshift logo">
+        <div class="flex gap-4 opacity-90">
+          <a href="#" class="hover:opacity-100">X</a>
+          <a href="#" class="hover:opacity-100">in</a>
+          <a href="#" class="hover:opacity-100">f</a>
+          <a href="#" class="hover:opacity-100">ig</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2 opacity-90">
+          <li><a href="#home" class="hover:underline">Home</a></li>
+          <li><a href="#about" class="hover:underline">About</a></li>
+          <li><a href="#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Legal & Privacy</h4>
+        <ul class="space-y-2 opacity-90">
+          <li><a href="#" class="hover:underline">Terms of Service</a></li>
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-xs opacity-75">
+      © <span id="year"></span> EDUshift. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ================= SIMPLE JS ================= -->
+  <script>
+    // Smooth scroll
+    document.querySelectorAll("a[href^='#']").forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        const target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =================================================================================================================================================================================== -->
+ 

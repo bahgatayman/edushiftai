@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUshift AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ====== Smooth page feel ====== */
+    html { scroll-behavior: smooth; }
+
+    /* ====== Entrance animations ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== Floating blobs ====== */
+    @keyframes floaty {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(18px, -12px) scale(1.05); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    @keyframes floaty2 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-16px, 14px) scale(1.06); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    /* ====== Utility classes ====== */
+    .animate-navbar { animation: slideDown .7s ease-out both; }
+    .animate-fadeUp { animation: fadeUp .85s ease-out both; }
+    .animate-fadeIn { animation: fadeIn .9s ease-out both; }
+
+    /* ====== Scroll reveal (starts hidden) ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .7s ease, transform .7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ====== Cards ====== */
+    .card-hover {
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.10);
+      border-color: rgba(4,112,133,.25);
+    }
+
+    /* ====== Icon pill ====== */
+    .icon-circle {
+      width: 44px; height: 44px; border-radius: 9999px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(20,184,166,.10);
+      box-shadow: inset 0 0 0 1px rgba(4,112,133,.1);
+    }
+
+    /* ====== Buttons micro-interactions ====== */
+    .btn-pop {
+      transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+    .btn-pop:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+    .btn-pop:active { transform: translateY(0); box-shadow: 0 6px 14px rgba(0,0,0,.10); }
+
+    /* ====== Glass card ====== */
+    .glass {
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.55);
+    }
+  </style>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+</head>
+
+<body class="bg-[#e6e3da] font-sans text-gray-700 overflow-x-hidden">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="w-full py-6 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center glass px-6 py-3 rounded-full shadow-sm animate-navbar">
+      <a href="#home" class="flex items-center gap-3">
+        <img src="logo-removebg-preview.png" class="w-28 md:w-32" alt="EDUshift logo">
+      </a>
+
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="#home" class="hover:text-teal-700 transition">Home</a>
+        <a href="#about" class="hover:text-teal-700 transition">About</a>
+        <a href="#services" class="hover:text-teal-700 transition">What we do</a>
+        <a href="#team" class="hover:text-teal-700 transition">Team</a>
+        <a href="#contact" class="hover:text-teal-700 transition">Contact</a>
+      </nav>
+
+      <div class="flex gap-3 md:gap-4 items-center">
+        <button class="text-sm hover:text-teal-700 transition">Sign in</button>
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm btn-pop">
+          Sign up
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="relative">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-10 md:py-16 px-6 relative">
+      <div class="animate-fadeUp" style="animation-delay:.05s;">
+
+        <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-700 leading-tight mb-4">
+          EDUshift AI
+          <span class="block text-gray-900/90 text-2xl md:text-3xl font-bold mt-2">
+            Learn faster. Practice smarter.
+          </span>
+        </h1>
+
+        <p class="mb-6 text-base leading-relaxed text-gray-600">
+          A modern learning platform that turns content into capability through guided paths, real projects,
+          and measurable progress.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full text-sm btn-pop">
+            Get Started
+          </button>
+          <a href="#services" class="px-6 py-3 rounded-full text-sm border border-teal-700/20 hover:bg-white/60 transition btn-pop">
+            Explore Features
+          </a>
+        </div>
+
+      </div>
+
+      <div class="animate-fadeIn" style="animation-delay:.12s;">
+        <div class="relative">
+          <div class="absolute -inset-5 bg-white/40 blur-2xl rounded-3xl"></div>
+          <img
+            src="9432de_3f37af6d7fc94dd88218a63176405913~mv2.avif"
+            class="relative w-full h-[300px] md:h-[420px] object-cover rounded-3xl shadow-xl"
+            alt="Learning illustration"
+          >
+
+          <!-- little floating badge -->
+          <div class="absolute -bottom-5 left-6 glass rounded-2xl px-4 py-3 shadow-md">
+            <p class="text-xs text-gray-500">New</p>
+            <p class="text-sm font-semibold text-gray-900">Interactive learning experiences</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-14 md:py-20 px-6">
+    <div class="reveal">
+      <p class="text-sm text-gray-500 mb-2">About EDUshift</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-cyan-700 mb-4">Accessible. Practical. Measurable.</h2>
+      <p class="text-base leading-relaxed text-gray-600">
+        We believe learning should feel real. EDUshift combines structured content with hands-on practice and
+        progress tracking—so learners can actually apply what they learn.
+      </p>
+
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="glass rounded-2xl p-4 shadow-sm card-hover">
+          <p class="font-semibold text-gray-900 mb-1">Skill-based tracks</p>
+          <p class="text-gray-600">Clear pathways with practical milestones.</p>
+        </div>
+        <div class="glass rounded-2xl p-4 shadow-sm card-hover">
+          <p class="font-semibold text-gray-900 mb-1">Progress insights</p>
+          <p class="text-gray-600">Feedback loops to keep learners moving.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <img
+        src="9432de_81a810a762564f85b819ba02ecaaa7cb~mv2.avif"
+        class="w-full h-[280px] md:h-[360px] object-cover rounded-3xl shadow-xl"
+        alt="About illustration"
+      >
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE DO ================= -->
+  <section id="services" class="bg-white py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="reveal">
+          <p class="text-sm text-gray-500 mb-1">What we do</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">A modern learning experience</h2>
+        </div>
+        <div class="reveal">
+          <p class="text-base text-gray-600 leading-relaxed">
+            We combine guided learning, project-based practice, and progress measurement—so learners build real skills.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 6v6l4 2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-cyan-700 mb-2">Guided Learning Paths</h3>
+          <p class="text-sm text-cyan-700 leading-relaxed">
+            Step-by-step tracks designed around outcomes—so learners always know what to do next.
+          </p>
+        </div>
+
+        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M8 7h8M8 11h8M8 15h6" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-cyan-700 mb-2">Practical Projects</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Tasks that feel like real work—perfect for students, graduates, and professionals.
+          </p>
+        </div>
+
+        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-teal-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M3 18V6M7 18V10M11 18V4M15 18V12M19 18V8" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-cyan-700 mb-2">Progress Tracking</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Simple metrics and feedback loops so learners see improvement and stay motivated.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="max-w-6xl  mx-auto py-14 md:py-20 px-6">
+    <div class="reveal relative overflow-hidden rounded-3xl bg-cyan-700 text-white p-8 md:p-10 shadow-xl">
+      <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white/10 blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-12 w-72 h-72 rounded-full bg-orange-400/20 blur-3xl"></div>
+
+      <div class="relative grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-extrabold mb-3">Ready to shift your learning?</h3>
+          <p class="text-white/80 leading-relaxed">
+            Join EDUshift and start building real skills through guided paths and practical practice.
+          </p>
+        </div>
+        <div class="flex md:justify-end gap-3">
+          <a href="#contact" class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-xl text-sm font-semibold btn-pop">
+            Contact us
+          </a>
+          <a href="#services" class="bg-white/10 hover:bg-white/15 px-6 py-3 rounded-xl text-sm font-semibold btn-pop">
+            See features
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section id="team" class="bg-white py-14 md:py-20">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-cyan-700">Meet Our Team</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <!-- Card 1 -->
+      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+        <img src="https://randomuser.me/api/portraits/men/30.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-cyan-700 text-lg font-bold">Ahmed Ali</h4>
+        <p class="text-sm text-gray-600 mb-4">CEO</p>
+        <div class="flex justify-center gap-4 text-cyan-700 text-xl">
+          <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+        <img src="https://randomuser.me/api/portraits/men/33.jpg" class="w-29 h-29 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-cyan-700 text-lg font-bold">Guy Hawkins</h4>
+        <p class="text-sm text-gray-600 mb-4">Product & Content Lead</p>
+        <div class="flex justify-center gap-4 text-cyan-700 text-xl">
+          <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+        <img src="https://randomuser.me/api/portraits/men/34.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-cyan-700 text-lg font-bold">Guy Hawkins</h4>
+        <p class="text-sm text-gray-600 mb-4">Partnerships & Growth</p>
+        <div class="flex justify-center gap-4 text-cyan-700 text-xl">
+          <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-cyan-700 text-lg font-bold">Jane Doe</h4>
+        <p class="text-sm text-gray-600 mb-4">UX Designer</p>
+        <div class="flex justify-center gap-4 text-cyan-700 text-xl">
+          <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-cyan-700 text-lg font-bold">Sarah Smith</h4>
+        <p class="text-sm text-gray-600 mb-4">Frontend Developer</p>
+        <div class="flex justify-center gap-4 text-cyan-700 text-xl">
+          <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+        <img src="https://randomuser.me/api/portraits/men/46.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+        <h4 class="font-semibold text-cyan-700 text-lg font-bold">John Doe</h4>
+        <p class="text-sm text-gray-600 mb-4">Backend Developer</p>
+        <div class="flex justify-center gap-4 text-cyan-700 text-xl">
+          <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- ================= CONTACT ================= -->
+<section id="contact" class="bg-white py-14 md:py-20">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="reveal">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900">Contact</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <form class="reveal space-y-4 glass rounded-3xl p-6 shadow-sm">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" placeholder="First name" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+          <input type="text" placeholder="Last name" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+        </div>
+        <input type="email" placeholder="Email" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+        <textarea placeholder="Message" rows="4" class="p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40"></textarea>
+        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl w-full btn-pop">
+          Send
+        </button>
+      </form>
+
+      <div class="reveal bg-[#047085] text-white p-6 rounded-3xl shadow-sm">
+        <h3 class="font-semibold mb-4 text-lg">Contact Information</h3>
+        <p class="text-sm mb-2 opacity-90">Email: info@example.com</p>
+        <p class="text-sm mb-2 opacity-90">Phone: 01152503691</p>
+        <p class="text-sm mb-6 opacity-90">Address: Nasr City, Cairo</p>
+        <div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.083870378206!2d31.333631124440338!3d30.06313031768504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f9b29fdb9d9%3A0x2f9697c19c38b3a4!2sMindShift%20MENA!5e0!3m2!1sar!2seg!4v1772586971353!5m2!1sar!2seg" class="w-full h-44 bg-white/10 rounded-2xl flex items-center justify-center text-sm opacity-80" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#047085] text-white py-12">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 px-6 text-sm">
+      <div>
+        <img src="logo-removebg-preview.png" class="w-28 mb-6" alt="EDUshift logo">
+        <div class="flex gap-4 opacity-90">
+          <a href="#" class="hover:opacity-100">X</a>
+          <a href="#" class="hover:opacity-100">in</a>
+          <a href="#" class="hover:opacity-100">f</a>
+          <a href="#" class="hover:opacity-100">ig</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2 opacity-90">
+          <li><a href="#home" class="hover:underline">Home</a></li>
+          <li><a href="#about" class="hover:underline">About</a></li>
+          <li><a href="#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Legal & Privacy</h4>
+        <ul class="space-y-2 opacity-90">
+          <li><a href="#" class="hover:underline">Terms of Service</a></li>
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-xs opacity-75">
+      © <span id="year"></span> EDUshift. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ================= JS: scroll reveal + year ================= -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("show");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    els.forEach((el, i) => {
+      // Stagger reveal slightly
+      el.style.transitionDelay = (i % 6) * 80 + "ms";
+      io.observe(el);
+    });
+  </script>
+
+</body>
+</html>
