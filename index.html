@@ -54,13 +54,38 @@
     }
 
     /* ====== Cards ====== */
-    .card-hover {
+    /* .card-hover {
       transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
+    } */
     .card-hover:hover {
-      transform: translateY(-6px);
+      /* transform: translateY(-6px); */
       box-shadow: 0 18px 40px rgba(0,0,0,.10);
       border-color: rgba(4,112,133,.25);
+      background-color: #047185;
+      color: white;
+      cursor: grab;
+    }
+
+    .card-hover:hover .text-hover {
+      color: white;
+    }
+
+    .cardteam-hover:hover {
+      background-color: #0e212f;
+      cursor: pointer;
+    }
+
+    .cardteam-hover:hover h4 {
+      color: #5ba5a4;
+      font-weight: 700;
+    }
+
+    .cardteam-hover:hover p {
+      color: white;
+    } */
+
+    /* .text-hover:hover{
+      color: white;
     }
 
     /* ====== Icon pill ====== */
@@ -125,8 +150,8 @@
 
         <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-700 leading-tight mb-4">
           EDUshift AI
-          <span class="block text-gray-900/90 text-2xl md:text-3xl font-bold mt-2">
-            Learn faster. Practice smarter.
+          <span class="block text-gray-900/90 text-2xl md:text-2xl font-bold mt-2">
+            <span class="text-[#5ba5a4]">Simulate Decisions.</span> <span class="text-[#f89422]">Measure Progress.</span>
           </span>
         </h1>
 
@@ -136,12 +161,12 @@
         </p>
 
         <div class="flex flex-wrap gap-3">
-          <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full text-sm btn-pop">
+          <button class="bg-[#0e212f] hover:bg-orange-600 text-white px-6 py-3 rounded-full text-sm btn-pop">
             Get Started
           </button>
-          <a href="#services" class="px-6 py-3 rounded-full text-sm border border-teal-700/20 hover:bg-white/60 transition btn-pop">
+          <!-- <a href="#services" class="px-6 py-3 rounded-full text-sm border border-teal-700/20 hover:bg-white/60 transition btn-pop">
             Explore Features
-          </a>
+          </a> -->
         </div>
 
       </div>
@@ -212,15 +237,15 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100">
+        <div class="reveal card-hover  bg-gray-50 rounded-3xl p-6 border border-gray-100">
           <div class="icon-circle mb-4">
             <svg class="w-5 h-5 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path d="M12 6v6l4 2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-width="1.8"/>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-cyan-700 mb-2">Guided Learning Paths</h3>
-          <p class="text-sm text-cyan-700 leading-relaxed">
+          <h3 class="text-lg font-bold text-cyan-700 mb-2 text-hover">Guided Learning Paths</h3>
+          <p class="text-sm text-cyan-700 leading-relaxed text-hover">
             Step-by-step tracks designed around outcomes—so learners always know what to do next.
           </p>
         </div>
@@ -232,8 +257,8 @@
               <path d="M8 7h8M8 11h8M8 15h6" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-cyan-700 mb-2">Practical Projects</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
+          <h3 class="text-lg font-bold text-cyan-700 mb-2 text-hover">Practical Projects</h3>
+          <p class="text-sm text-gray-600 leading-relaxed text-hover">
             Tasks that feel like real work—perfect for students, graduates, and professionals.
           </p>
         </div>
@@ -244,8 +269,8 @@
               <path d="M3 18V6M7 18V10M11 18V4M15 18V12M19 18V8" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-cyan-700 mb-2">Progress Tracking</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
+          <h3 class="text-lg font-bold text-cyan-700 mb-2 text-hover">Progress Tracking</h3>
+          <p class="text-sm text-gray-600 leading-relaxed text-hover">
             Simple metrics and feedback loops so learners see improvement and stay motivated.
           </p>
         </div>
@@ -349,7 +374,7 @@
     <div class="grid md:grid-cols-3 gap-10">
 
       <!-- Card 1 -->
-      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+      <div class="reveal glass rounded-3xl p-6 shadow-sm cardteam-hover">
         <img src="https://randomuser.me/api/portraits/men/30.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
         <h4 class="font-semibold text-cyan-700 text-lg font-bold">Ahmed Ali</h4>
         <p class="text-sm text-gray-600 mb-4">CEO</p>
@@ -360,7 +385,7 @@
       </div>
 
       <!-- Card 2 -->
-      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+      <div class="reveal glass rounded-3xl p-6 shadow-sm cardteam-hover">
         <img src="https://randomuser.me/api/portraits/men/33.jpg" class="w-29 h-29 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
         <h4 class="font-semibold text-cyan-700 text-lg font-bold">Guy Hawkins</h4>
         <p class="text-sm text-gray-600 mb-4">Product & Content Lead</p>
@@ -371,7 +396,7 @@
       </div>
 
       <!-- Card 3 -->
-      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+      <div class="reveal glass rounded-3xl p-6 shadow-sm cardteam-hover">
         <img src="https://randomuser.me/api/portraits/men/34.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
         <h4 class="font-semibold text-cyan-700 text-lg font-bold">Guy Hawkins</h4>
         <p class="text-sm text-gray-600 mb-4">Partnerships & Growth</p>
@@ -382,7 +407,7 @@
       </div>
 
       <!-- Card 4 -->
-      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+      <div class="reveal glass rounded-3xl p-6 shadow-sm cardteam-hover">
         <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
         <h4 class="font-semibold text-cyan-700 text-lg font-bold">Jane Doe</h4>
         <p class="text-sm text-gray-600 mb-4">UX Designer</p>
@@ -393,7 +418,7 @@
       </div>
 
       <!-- Card 5 -->
-      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+      <div class="reveal glass rounded-3xl p-6 shadow-sm cardteam-hover">
         <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
         <h4 class="font-semibold text-cyan-700 text-lg font-bold">Sarah Smith</h4>
         <p class="text-sm text-gray-600 mb-4">Frontend Developer</p>
@@ -404,7 +429,7 @@
       </div>
 
       <!-- Card 6 -->
-      <div class="reveal glass rounded-3xl p-6 shadow-sm card-hover">
+      <div class="reveal glass rounded-3xl p-6 shadow-sm cardteam-hover">
         <img src="https://randomuser.me/api/portraits/men/46.jpg" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
         <h4 class="font-semibold text-cyan-700 text-lg font-bold">John Doe</h4>
         <p class="text-sm text-gray-600 mb-4">Backend Developer</p>
