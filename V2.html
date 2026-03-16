@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUshift AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.3/dist/dotlottie-wc.js" type="module"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --ease-main: cubic-bezier(.22, 1, .36, 1);
+      --ease-soft: cubic-bezier(.25, .46, .45, .94);
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* ====== Entrance animations ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floaty {
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      50%  { transform: translate3d(14px,-12px,0) scale(1.03); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    @keyframes floaty2 {
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      50%  { transform: translate3d(-12px,10px,0) scale(1.04); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); opacity: .55; }
+      50% { transform: scale(1.08); opacity: .9; }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-140%); }
+      100% { transform: translateX(140%); }
+    }
+
+    @keyframes badgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* ====== Utility classes ====== */
+    .animate-navbar { animation: slideDown .8s var(--ease-main) both; }
+    .animate-fadeUp { animation: fadeUp .95s var(--ease-main) both; }
+    .animate-fadeIn { animation: fadeIn 1s ease both; }
+
+    /* ====== Scroll reveal ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px) scale(.985);
+      transition:
+        opacity .8s var(--ease-main),
+        transform .8s var(--ease-main);
+      will-change: opacity, transform;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ====== Cards ====== */
+    .card-hover {
+      transition:
+        transform .35s var(--ease-main),
+        box-shadow .35s var(--ease-main),
+        border-color .35s var(--ease-main),
+        background-color .35s var(--ease-main),
+        color .35s var(--ease-main);
+      transform-origin: center;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 48px rgba(0,0,0,.12);
+      border-color: rgba(4,112,133,.28);
+      background-color: #047185;
+      color: white;
+      cursor: pointer;
+    }
+
+    .card-hover:hover .text-hover,
+    .card-hover:hover h3,
+    .card-hover:hover p,
+    .card-hover:hover svg {
+      color: white;
+    }
+
+    .cardteam-hover {
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform .4s var(--ease-main),
+        background-color .4s var(--ease-main),
+        box-shadow .4s var(--ease-main),
+        border-color .4s var(--ease-main);
+      border: 1px solid rgba(4,112,133,.08);
+    }
+
+    .cardteam-hover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(14,33,47,.03) 100%);
+      opacity: 1;
+      transition: opacity .35s var(--ease-main);
+      pointer-events: none;
+    }
+
+    .cardteam-hover::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: -30%;
+      width: 70%;
+      height: 180%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.18) 50%, transparent 100%);
+      transform: rotate(18deg) translateX(-180%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cardteam-hover:hover {
+      transform: translateY(-10px);
+      background-color: #0e212f;
+      cursor: pointer;
+      box-shadow: 0 24px 50px rgba(8, 25, 34, .18);
+      border-color: rgba(91,165,164,.25);
+    }
+
+    .cardteam-hover:hover::before {
+      opacity: 0;
+    }
+
+    .cardteam-hover:hover::after {
+      opacity: 1;
+      transition: transform .9s var(--ease-soft), opacity .25s ease;
+      transform: rotate(18deg) translateX(260%);
+    }
+
+    .cardteam-hover img {
+      width: 112px;
+      height: 112px;
+      border-radius: 9999px;
+      transition: transform .45s var(--ease-main), box-shadow .35s var(--ease-main), filter .35s var(--ease-main);
+      border: 4px solid rgba(255,255,255,.95);
+      box-shadow: 0 10px 24px rgba(14,33,47,.10);
+      position: relative;
+      z-index: 1;
+    }
+
+    .cardteam-hover:hover img {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 16px 30px rgba(0,0,0,.20);
+      filter: saturate(1.05);
+    }
+
+    .cardteam-hover h4,
+    .cardteam-hover p,
+    .cardteam-hover .team-social a {
+      position: relative;
+      z-index: 1;
+      transition: color .3s var(--ease-main), transform .3s var(--ease-main), opacity .3s var(--ease-main);
+    }
+
+    .cardteam-hover h4 {
+      margin-top: .25rem;
+    }
+
+    .cardteam-hover:hover h4 {
+      color: #5ba5a4;
+      transform: translateY(-1px);
+    }
+
+    .cardteam-hover:hover p,
+    .cardteam-hover:hover .team-social a {
+      color: white;
+    }
+
+    .cardteam-hover .team-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      background: rgba(4,112,133,.08);
+      transition: transform .28s var(--ease-main), background-color .28s var(--ease-main), color .28s var(--ease-main);
+    }
+
+    .cardteam-hover .team-social a:hover {
+      transform: translateY(-3px) scale(1.06);
+    }
+
+    .cardteam-hover:hover .team-social a {
+      background: rgba(255,255,255,.12);
+    }
+
+    .cardteam-hover:hover .team-social a:nth-child(1) {
+      transition-delay: .02s;
+    }
+
+    .cardteam-hover:hover .team-social a:nth-child(2) {
+      transition-delay: .06s;
+    }
+
+    .team-card-reveal {
+      opacity: 0;
+      transform: translateY(34px) scale(.96);
+      transition:
+        opacity .75s var(--ease-main),
+        transform .75s var(--ease-main);
+    }
+
+    .team-card-reveal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ====== Icon pill ====== */
+    .icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(20,184,166,.10);
+      box-shadow: inset 0 0 0 1px rgba(4,112,133,.1);
+      transition: transform .35s var(--ease-main), background-color .35s var(--ease-main);
+    }
+
+    .card-hover:hover .icon-circle {
+      background: rgba(255,255,255,.14);
+      transform: scale(1.08) rotate(4deg);
+    }
+
+    /* ====== Buttons ====== */
+    .btn-pop {
+      transition:
+        transform .22s var(--ease-main),
+        box-shadow .25s var(--ease-main),
+        background-color .25s var(--ease-main),
+        opacity .25s var(--ease-main);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .btn-pop::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.25) 50%, transparent 80%);
+      transform: translateX(-140%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .btn-pop:hover::after {
+      animation: shimmer 1s var(--ease-soft);
+    }
+
+    .btn-pop:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(0,0,0,.14);
+    }
+
+    .btn-pop:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 14px rgba(0,0,0,.10);
+    }
+
+    /* ====== Glass ====== */
+    .glass {
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.55);
+    }
+
+    /* ====== Decorative motion ====== */
+    .hero-blob-1,
+    .hero-blob-2 {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(48px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-blob-1 {
+      width: 280px;
+      height: 280px;
+      background: rgba(91,165,164,.18);
+      top: 8%;
+      left: -4%;
+      animation: floaty 8s ease-in-out infinite;
+    }
+
+    .hero-blob-2 {
+      width: 240px;
+      height: 240px;
+      background: rgba(248,148,34,.14);
+      bottom: 4%;
+      right: -3%;
+      animation: floaty2 9s ease-in-out infinite;
+    }
+
+    .hero-image-wrap {
+      transform: translateZ(0);
+      transition: transform .5s var(--ease-main);
+    }
+
+    .hero-image-wrap:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .hero-image-shadow {
+      animation: pulseSoft 6s ease-in-out infinite;
+    }
+
+    .badge-float {
+      animation: badgeFloat 4s ease-in-out infinite;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: #047085;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s var(--ease-main);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    .tilt-soft {
+      transform-style: preserve-3d;
+      transition: transform .2s ease;
+    }
+
+    /* ====== Contact form polish ====== */
+    .field {
+      transition: transform .25s var(--ease-main), box-shadow .25s var(--ease-main), background-color .25s var(--ease-main);
+    }
+
+    .field:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 4px rgba(4, 112, 133, .10);
+      background-color: #fff;
+    }
+
+    /* ====== Reduced motion ====== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: .01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-[#e6e3da] font-sans text-gray-700 overflow-x-hidden">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="w-full py-6 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center glass px-6 py-3 rounded-full shadow-sm animate-navbar transition-shadow duration-300 hover:shadow-md">
+      <a href="#home" class="flex items-center gap-3">
+        <img src="logo-removebg-preview.png" class="w-28 md:w-32 transition-transform duration-300 hover:scale-[1.02]" alt="EDUshift logo">
+      </a>
+
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="#home" class="nav-link hover:text-teal-700 transition">Home</a>
+        <a href="#about" class="nav-link hover:text-teal-700 transition">About</a>
+        <a href="#services" class="nav-link hover:text-teal-700 transition">What we do</a>
+        <a href="#team" class="nav-link hover:text-teal-700 transition">Team</a>
+        <a href="#contact" class="nav-link hover:text-teal-700 transition">Contact</a>
+      </nav>
+
+      <div class="flex gap-3 md:gap-4 items-center">
+        <button class="text-sm hover:text-teal-700 transition">Sign in</button>
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm btn-pop">
+          Sign up
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-10 md:py-16 px-6 relative z-10">
+      <div class="animate-fadeUp" style="animation-delay:.05s;">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-700 leading-tight mb-4">
+          EDUshift AI
+          <span class="block text-gray-900/90 text-2xl md:text-2xl font-bold mt-2">
+            <span class="text-[#5ba5a4]">Simulate Decisions.</span> <span class="text-[#f89422]">Measure Progress.</span>
+          </span>
+        </h1>
+
+        <p class="mb-6 text-base leading-relaxed text-gray-600 max-w-xl">
+          A modern learning platform that turns content into capability through guided paths, real projects,
+          and measurable progress.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <button class="bg-[#0e212f] hover:bg-orange-600 text-white px-6 py-3 rounded-full text-sm btn-pop">
+            Get Started
+          </button>
+        </div>
+      </div>
+
+      <div class="animate-fadeIn" style="animation-delay:.12s;">
+        <div class="relative hero-image-wrap tilt-soft">
+          <div class="absolute -inset-5 bg-white/40 blur-2xl rounded-3xl hero-image-shadow"></div>
+          <img
+            src="9432de_3f37af6d7fc94dd88218a63176405913~mv2.avif"
+            class="relative w-full h-[300px] md:h-[420px] object-cover rounded-3xl shadow-xl"
+            alt="Learning illustration"
+          >
+
+          <div class="absolute -bottom-5 left-6 glass rounded-2xl px-4 py-3 shadow-md badge-float">
+            <p class="text-xs text-gray-500">New</p>
+            <p class="text-sm font-semibold text-gray-900">Interactive learning experiences</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center py-14 md:py-20 px-6">
+    <div class="reveal">
+      <p class="text-sm text-gray-500 mb-2">About EDUshift</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-cyan-700 mb-4">Accessible. Practical. Measurable.</h2>
+      <p class="text-base leading-relaxed text-gray-600">
+        We believe learning should feel real. EDUshift combines structured content with hands-on practice and
+        progress tracking—so learners can actually apply what they learn.
+      </p>
+
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="glass rounded-2xl p-4 shadow-sm card-hover">
+          <p class="font-semibold text-gray-900 mb-1 text-hover">Skill-based tracks</p>
+          <p class="text-gray-600 text-hover">Clear pathways with practical milestones.</p>
+        </div>
+        <div class="glass rounded-2xl p-4 shadow-sm card-hover">
+          <p class="font-semibold text-gray-900 mb-1 text-hover">Progress insights</p>
+          <p class="text-gray-600 text-hover">Feedback loops to keep learners moving.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal tilt-soft">
+      <img
+        src="9432de_81a810a762564f85b819ba02ecaaa7cb~mv2.avif"
+        class="w-full h-[280px] md:h-[360px] object-cover rounded-3xl shadow-xl transition-transform duration-500 hover:scale-[1.015]"
+        alt="About illustration"
+      >
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE DO ================= -->
+  <section id="services" class="bg-white py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="reveal">
+          <p class="text-sm text-gray-500 mb-1">What we do</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">A modern learning experience</h2>
+        </div>
+        <div class="reveal">
+          <p class="text-base text-gray-600 leading-relaxed">
+            We combine guided learning, project-based practice, and progress measurement—so learners build real skills.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100 tilt-soft">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 6v6l4 2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-cyan-700 mb-2 text-hover">Guided Learning Paths</h3>
+          <p class="text-sm text-cyan-700 leading-relaxed text-hover">
+            Step-by-step tracks designed around outcomes—so learners always know what to do next.
+          </p>
+        </div>
+
+        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100 tilt-soft">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M8 7h8M8 11h8M8 15h6" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-cyan-700 mb-2 text-hover">Practical Projects</h3>
+          <p class="text-sm text-gray-600 leading-relaxed text-hover">
+            Tasks that feel like real work—perfect for students, graduates, and professionals.
+          </p>
+        </div>
+
+        <div class="reveal card-hover bg-gray-50 rounded-3xl p-6 border border-gray-100 tilt-soft">
+          <div class="icon-circle mb-4">
+            <svg class="w-5 h-5 text-teal-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M3 18V6M7 18V10M11 18V4M15 18V12M19 18V8" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-cyan-700 mb-2 text-hover">Progress Tracking</h3>
+          <p class="text-sm text-gray-600 leading-relaxed text-hover">
+            Simple metrics and feedback loops so learners see improvement and stay motivated.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Courses ================= -->
+  <section id="courses" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-5 items-center py-10 md:py-2 px-6">
+    <div class="flex justify-center reveal">
+      <dotlottie-wc
+        src="https://lottie.host/a77b6c37-761b-48dc-bd09-8938c1c1c326/ZE0KQoKEFd.lottie"
+        style="width:350px;height:350px"
+        autoplay
+        loop>
+      </dotlottie-wc>
+    </div>
+
+    <div class="reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-cyan-700">Courses</h2>
+      <p class="text-gray-600 leading-relaxed text-lg text-cyan-700">
+        Explore practical learning experiences designed to help you build real skills.
+        Our courses combine hands-on projects, expert insights, and structured learning
+        paths to help you grow faster and apply knowledge directly in real situations.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Simulations ================= -->
+  <section id="simulations" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-5 items-center py-10 md:py-2 px-6">
+    <div class="reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-cyan-700">Digital Simulations</h2>
+      <p class="text-gray-600 leading-relaxed text-lg text-cyan-700">
+        Experience decision-making in a risk-free environment. Our simulations allow
+        you to test strategies, analyze outcomes, and understand how real businesses
+        grow, compete, and adapt in dynamic markets.
+      </p>
+    </div>
+
+    <div class="flex justify-center reveal">
+      <dotlottie-wc
+        src="https://lottie.host/3aeca656-8277-4832-98b3-56db9ecd46fe/kPerqPzEeL.lottie"
+        style="width:350px;height:350px"
+        autoplay
+        loop>
+      </dotlottie-wc>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="max-w-6xl mx-auto py-14 md:py-20 px-6">
+    <div class="reveal relative overflow-hidden rounded-3xl bg-cyan-700 text-white p-8 md:p-10 shadow-xl">
+      <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white/10 blur-3xl animate-[floaty_8s_ease-in-out_infinite]"></div>
+      <div class="absolute -bottom-20 -left-12 w-72 h-72 rounded-full bg-orange-400/20 blur-3xl animate-[floaty2_9s_ease-in-out_infinite]"></div>
+
+      <div class="relative grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-extrabold mb-3">Ready to shift your learning?</h3>
+          <p class="text-white/80 leading-relaxed">
+            Join EDUshift and start building real skills through guided paths and practical practice.
+          </p>
+        </div>
+        <div class="flex md:justify-end gap-3">
+          <a href="#contact" class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-xl text-sm font-semibold btn-pop">Contact us</a>
+          <a href="#services" class="bg-white/10 hover:bg-white/15 px-6 py-3 rounded-xl text-sm font-semibold btn-pop">See features</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section id="team" class="bg-white py-14 md:py-20 relative overflow-hidden">
+    <div class="absolute top-10 left-0 w-64 h-64 rounded-full bg-[#5ba5a4]/10 blur-3xl pointer-events-none animate-[floaty_10s_ease-in-out_infinite]"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-[#f89422]/10 blur-3xl pointer-events-none animate-[floaty2_11s_ease-in-out_infinite]"></div>
+    <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+      <div class="reveal">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-cyan-700">Meet Our Team</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-10">
+        <div class="reveal team-card-reveal glass rounded-3xl p-7 shadow-sm cardteam-hover tilt-soft">
+          <img src="Zaree.png" class="w-30 h-30 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+          <h4 class="font-semibold text-cyan-700 text-lg font-bold">Mohamed ElZaree</h4>
+          <p class="text-sm text-gray-600 mb-4">General Manager</p>
+          <div class="team-social flex justify-center gap-3 text-cyan-700 text-base">
+            <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="reveal team-card-reveal glass rounded-3xl p-7 shadow-sm cardteam-hover tilt-soft">
+          <img src="Bahgat.png" class="w-30 h-30 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+          <h4 class="font-semibold text-cyan-700 text-lg font-bold">Bahgat Ayman</h4>
+          <p class="text-sm text-gray-600 mb-4">Product Manager</p>
+          <div class="team-social flex justify-center gap-3 text-cyan-700 text-base">
+            <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="reveal team-card-reveal glass rounded-3xl p-7 shadow-sm cardteam-hover tilt-soft">
+          <img src="Bakr.png" class="w-30 h-30 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+          <h4 class="font-semibold text-cyan-700 text-lg font-bold">Youssef Bakr</h4>
+          <p class="text-sm text-gray-600 mb-4">Partnerships & Growth</p>
+          <div class="team-social flex justify-center gap-3 text-cyan-700 text-base">
+            <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="reveal team-card-reveal glass rounded-3xl p-7 shadow-sm cardteam-hover tilt-soft">
+          <img src="Tarek.png" class="w-30 h-30 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+          <h4 class="font-semibold text-cyan-700 text-lg font-bold">Mohammed Tarek</h4>
+          <p class="text-sm text-gray-600 mb-4">UX Designer</p>
+          <div class="team-social flex justify-center gap-3 text-cyan-700 text-base">
+            <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="reveal team-card-reveal glass rounded-3xl p-7 shadow-sm cardteam-hover tilt-soft">
+          <img src="reem.png" class="w-30 h-30 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+          <h4 class="font-semibold text-cyan-700 text-lg font-bold">Reem Mohamed</h4>
+          <p class="text-sm text-gray-600 mb-4">Frontend Developer</p>
+          <div class="team-social flex justify-center gap-3 text-cyan-700 text-base">
+            <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="reveal team-card-reveal glass rounded-3xl p-7 shadow-sm cardteam-hover tilt-soft">
+          <img src="osama.png" class="w-30 h-30 rounded-full mx-auto mb-4 object-cover" alt="Team member"/>
+          <h4 class="font-semibold text-cyan-700 text-lg font-bold">John Doe</h4>
+          <p class="text-sm text-gray-600 mb-4">Backend Developer</p>
+          <div class="team-social flex justify-center gap-3 text-cyan-700 text-base">
+            <a class="hover:underline" href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="hover:underline" href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="bg-white py-14 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900">Contact</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <form class="reveal space-y-4 glass rounded-3xl p-6 shadow-sm">
+          <div class="grid md:grid-cols-2 gap-4">
+            <input type="text" placeholder="First name" class="field p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+            <input type="text" placeholder="Last name" class="field p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+          </div>
+          <input type="email" placeholder="Email" class="field p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40">
+          <textarea placeholder="Message" rows="4" class="field p-3 rounded-xl bg-gray-100 w-full outline-none focus:ring-2 focus:ring-teal-600/40"></textarea>
+          <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl w-full btn-pop">
+            Send
+          </button>
+        </form>
+
+        <div class="reveal bg-[#047085] text-white p-6 rounded-3xl shadow-sm transition-transform duration-500 hover:-translate-y-1">
+          <h3 class="font-semibold mb-4 text-lg">Contact Information</h3>
+          <p class="text-sm mb-2 opacity-90">Email: info@example.com</p>
+          <p class="text-sm mb-2 opacity-90">Phone: 01152503691</p>
+          <p class="text-sm mb-6 opacity-90">Address: Nasr City, Cairo</p>
+          <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.083870378206!2d31.333631124440338!3d30.06313031768504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f9b29fdb9d9%3A0x2f9697c19c38b3a4!2sMindShift%20MENA!5e0!3m2!1sar!2seg!4v1772586971353!5m2!1sar!2seg" class="w-full h-44 bg-white/10 rounded-2xl flex items-center justify-center text-sm opacity-80" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#047085] text-white py-12">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 px-6 text-sm">
+      <div>
+        <img src="logo-removebg-preview.png" class="w-28 mb-6 transition-transform duration-300 hover:scale-[1.02]" alt="EDUshift logo">
+        <div class="flex gap-4 opacity-90">
+          <a href="#" class="hover:opacity-100 transition">X</a>
+          <a href="#" class="hover:opacity-100 transition">in</a>
+          <a href="#" class="hover:opacity-100 transition">f</a>
+          <a href="#" class="hover:opacity-100 transition">ig</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2 opacity-90">
+          <li><a href="#home" class="hover:underline">Home</a></li>
+          <li><a href="#about" class="hover:underline">About</a></li>
+          <li><a href="#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Legal & Privacy</h4>
+        <ul class="space-y-2 opacity-90">
+          <li><a href="#" class="hover:underline">Terms of Service</a></li>
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-xs opacity-75">
+      © <span id="year"></span> EDUshift. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ================= JS ================= -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("show");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    els.forEach((el, i) => {
+      el.style.transitionDelay = (i % 6) * 90 + "ms";
+      io.observe(el);
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const setActiveLink = () => {
+      let current = "home";
+      sections.forEach(section => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 140;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+      });
+    };
+
+    window.addEventListener("scroll", setActiveLink);
+    setActiveLink();
+
+    // Soft tilt effect for selected cards/images
+    const tiltItems = document.querySelectorAll('.tilt-soft');
+
+    tiltItems.forEach(item => {
+      item.addEventListener('mousemove', (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -3;
+        const rotateY = ((x - centerX) / centerX) * 3;
+
+        item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      });
+    });
+  </script>
+</body>
+</html>
