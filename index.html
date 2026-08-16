@@ -222,8 +222,8 @@
 
       <div class="flex gap-3 md:gap-4 items-center">
         <button class="text-sm hover:text-teal-700 transition"><a href="https://platform.edushiftai.com/login">Login</a></button>
-        <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm btn-pop">
-          <a href="https://platform.edushiftai.com/signup">Sign up</a>
+        <button type="button" data-open-demo class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm btn-pop">
+          Request a demo
         </button>
       </div>
     </div>
@@ -484,9 +484,9 @@
           </p>
         </div>
         <div class="flex md:justify-end gap-3">
-          <a href="#contact" class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-xl text-sm font-semibold btn-pop cta-pulse">
-            Contact us
-          </a>
+          <button type="button" data-open-demo class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-xl text-sm font-semibold btn-pop cta-pulse">
+            Request a demo
+          </button>
           <a href="#services" class="bg-white/10 hover:bg-white/15 px-6 py-3 rounded-xl text-sm font-semibold btn-pop">
             See features
           </a>
@@ -582,29 +582,48 @@
     </div>
 
     <div class="grid md:grid-cols-2 gap-8">
-      <form class="reveal space-y-4 glass bg-[#EBE7DB] text-[#0e212f] rounded-3xl p-6 shadow-sm">
+      <form id="contact-form" class="reveal space-y-4 glass bg-[#EBE7DB] text-[#0e212f] rounded-3xl p-6 shadow-sm text-left" novalidate>
         <div class="grid md:grid-cols-2 gap-4">
           <label class="block">
-            <span class="text-sm font-medium text-gray-700">First name</span>
-            <input aria-label="First name" type="text" placeholder="First name" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+            <span class="text-sm font-medium text-gray-700">First name <span class="text-orange-500">*</span></span>
+            <input name="firstName" aria-label="First name" type="text" required autocomplete="given-name" placeholder="First name" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
           </label>
           <label class="block">
-            <span class="text-sm font-medium text-gray-700">Last name</span>
-            <input aria-label="Last name" type="text" placeholder="Last name" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+            <span class="text-sm font-medium text-gray-700">Last name <span class="text-orange-500">*</span></span>
+            <input name="lastName" aria-label="Last name" type="text" required autocomplete="family-name" placeholder="Last name" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Email <span class="text-orange-500">*</span></span>
+            <input name="email" aria-label="Email" type="email" required autocomplete="email" placeholder="Email" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Phone <span class="text-orange-500">*</span></span>
+            <input name="phone" aria-label="Phone" type="tel" required autocomplete="tel" placeholder="+20 123 456 7890" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Company <span class="text-orange-500">*</span></span>
+            <input name="company" aria-label="Company" type="text" required autocomplete="organization" placeholder="Company" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Position <span class="text-orange-500">*</span></span>
+            <input name="position" aria-label="Position" type="text" required autocomplete="organization-title" placeholder="Position" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
           </label>
         </div>
 
         <label class="block">
-          <span class="text-sm font-medium text-gray-700">Email</span>
-          <input aria-label="Email" type="email" placeholder="Email" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40">
+          <span class="text-sm font-medium text-gray-700">Message <span class="text-orange-500">*</span></span>
+          <textarea name="interests" aria-label="Message" placeholder="Tell us what you're interested in..." rows="4" required class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40"></textarea>
         </label>
 
-        <label class="block">
-          <span class="text-sm font-medium text-gray-700">Message</span>
-          <textarea aria-label="Message" placeholder="Message" rows="4" class="mt-1 p-3 rounded-xl bg-[#EBE7DB] w-full border border-[#047185] outline-none focus:ring-2 focus:ring-[#047185]/40"></textarea>
-        </label>
+        <p id="contact-status" class="text-sm hidden" role="status" aria-live="polite"></p>
 
-        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl w-full btn-pop flex items-center justify-center gap-2">
+        <button type="submit" id="contact-submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl w-full btn-pop flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
           <i class="fa-solid fa-paper-plane"></i>
           <span>Send message</span>
         </button>
@@ -680,6 +699,77 @@
     </div>
   </div>
 </footer>
+  <!-- ================= REQUEST A DEMO MODAL ================= -->
+  <div id="demo-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+    <!-- Backdrop -->
+    <div data-close-demo class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+    <!-- Dialog -->
+    <div class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[#EBE7DB] text-[#0e212f] rounded-3xl shadow-2xl p-6 md:p-8">
+      <button type="button" data-close-demo aria-label="Close" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 id="demo-modal-title" class="text-2xl font-bold text-[#047185] mb-1">Request a demo</h3>
+      <p class="text-sm text-gray-600 mb-6">Tell us a bit about you and we'll be in touch.</p>
+
+      <form id="demo-form" class="space-y-4" novalidate>
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">First name <span class="text-orange-500">*</span></span>
+            <input name="firstName" type="text" required autocomplete="given-name" placeholder="Ada"
+              class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Last name <span class="text-orange-500">*</span></span>
+            <input name="lastName" type="text" required autocomplete="family-name" placeholder="Lovelace"
+              class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Email <span class="text-orange-500">*</span></span>
+            <input name="email" type="email" required autocomplete="email" placeholder="ada@example.com"
+              class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Phone <span class="text-orange-500">*</span></span>
+            <input name="phone" type="tel" required autocomplete="tel" placeholder="+20 123 456 7890"
+              class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Company <span class="text-orange-500">*</span></span>
+            <input name="company" type="text" required autocomplete="organization" placeholder="Analytical Engines"
+              class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Position <span class="text-orange-500">*</span></span>
+            <input name="position" type="text" required autocomplete="organization-title" placeholder="CTO"
+              class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40">
+          </label>
+        </div>
+
+        <label class="block">
+          <span class="text-sm font-medium text-gray-700">What are you interested in? <span class="text-orange-500">*</span></span>
+          <textarea name="interests" rows="4" required placeholder="We want a simulation for our sales team..."
+            class="mt-1 p-3 rounded-xl bg-white w-full border border-[#047185]/40 outline-none focus:ring-2 focus:ring-[#047185]/40"></textarea>
+        </label>
+
+        <p id="demo-status" class="text-sm hidden" role="status" aria-live="polite"></p>
+
+        <button type="submit" id="demo-submit"
+          class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl w-full btn-pop flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Send request</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- ================= JS: scroll reveal + year ================= -->
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -833,6 +923,116 @@
       renderSlide(0);
       startAutoPlay();
     }
+
+    // ================= Request a demo (modal + contact form) =================
+    (function requestDemo(){
+      const ENDPOINT = "https://platform.edushiftai.com/api/v1/demo-requests";
+
+      // Shared submit handler — POSTs any form's fields to the demo endpoint.
+      const wireDemoForm = (form, status, submitBtn, onSuccess) => {
+        if (!form) return;
+        const btnLabel = submitBtn ? submitBtn.querySelector("span") : null;
+        const originalLabel = btnLabel ? btnLabel.textContent : "";
+
+        const setStatus = (msg, ok) => {
+          if (!status) return;
+          status.textContent = msg;
+          status.classList.remove("hidden", "text-red-600", "text-green-700");
+          status.classList.add(ok ? "text-green-700" : "text-red-600");
+        };
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (status) status.classList.add("hidden");
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          const data = Object.fromEntries(new FormData(form).entries());
+          Object.keys(data).forEach((k) => (data[k] = String(data[k]).trim()));
+
+          if (submitBtn) submitBtn.disabled = true;
+          if (btnLabel) btnLabel.textContent = "Sending...";
+
+          try {
+            const res = await fetch(ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            if (!res.ok) {
+              // Server responded but rejected the request — surface its message.
+              let serverMsg = "Request failed (" + res.status + ")";
+              try {
+                const body = await res.json();
+                if (body && body.message) {
+                  serverMsg = Array.isArray(body.message) ? body.message.join(", ") : body.message;
+                }
+              } catch (_) {}
+              console.error("[demo-form] server rejected request:", res.status, serverMsg);
+              setStatus(serverMsg, false);
+              return;
+            }
+
+            setStatus("Thanks! Your request has been sent. We'll be in touch soon.", true);
+            form.reset();
+            if (typeof onSuccess === "function") setTimeout(onSuccess, 2500);
+          } catch (err) {
+            // fetch() itself threw -> network error or CORS block (browser never got a response).
+            console.error("[demo-form] fetch failed (likely CORS or network):", err);
+            setStatus("Couldn't reach the server. This is usually a CORS/network issue — please try again or email info@edushiftai.com.", false);
+          } finally {
+            if (submitBtn) submitBtn.disabled = false;
+            if (btnLabel) btnLabel.textContent = originalLabel;
+          }
+        });
+      };
+
+      // ---- Modal ----
+      const modal = document.getElementById("demo-modal");
+      if (modal) {
+        const form = document.getElementById("demo-form");
+        let lastFocused = null;
+
+        const openModal = () => {
+          lastFocused = document.activeElement;
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+          document.body.style.overflow = "hidden";
+          const first = form.querySelector("input, textarea");
+          if (first) setTimeout(() => first.focus(), 50);
+        };
+
+        const closeModal = () => {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+          document.body.style.overflow = "";
+          if (lastFocused) lastFocused.focus();
+        };
+
+        document.querySelectorAll("[data-open-demo]").forEach((btn) =>
+          btn.addEventListener("click", openModal)
+        );
+        document.querySelectorAll("[data-close-demo]").forEach((el) =>
+          el.addEventListener("click", closeModal)
+        );
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+        });
+
+        wireDemoForm(form, document.getElementById("demo-status"), document.getElementById("demo-submit"), closeModal);
+      }
+
+      // ---- Contact form (also submits as a demo request) ----
+      wireDemoForm(
+        document.getElementById("contact-form"),
+        document.getElementById("contact-status"),
+        document.getElementById("contact-submit")
+      );
+    })();
   </script>
 
 </body>
